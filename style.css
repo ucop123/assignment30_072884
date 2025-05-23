@@ -83,7 +83,7 @@ canvas {
   border-radius: 4px;
 }
 
-.back-home {
+.backhome {
   display: inline-block;
   margin-top: 2rem;
   text-decoration: none;
@@ -95,7 +95,7 @@ canvas {
   transition: background-color 0.2s ease-in-out;
 }
 
-.back-home:hover {
+.backhome:hover {
   background-color: #1e293b;
 }
 
