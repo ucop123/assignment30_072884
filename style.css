@@ -1,34 +1,62 @@
+/* styles.css */
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f0f4f8;
-  color: #1e293b;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to bottom right, #f8fafc, #e2e8f0);
   margin: 0;
   padding: 0;
+  color: #1e293b;
 }
 
 .container {
   max-width: 800px;
-  margin: 0 auto;
+  margin: 2rem auto;
   padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
 }
 
-h1 {
+h1, h2 {
   color: #2563eb;
 }
 
-input, button {
+input[type="text"] {
   padding: 0.5rem;
-  margin-top: 0.5rem;
+  border: 1px solid #cbd5e0;
+  border-radius: 6px;
   margin-right: 0.5rem;
+  width: 60%;
 }
 
 button {
+  padding: 0.5rem 1rem;
   background-color: #2563eb;
   color: white;
   border: none;
+  border-radius: 6px;
   cursor: pointer;
+  margin-top: 0.5rem;
 }
 
 button:hover {
-  background-color: #1d4ed8;
+  background-color: #1e40af;
+}
+
+canvas {
+  margin-top: 1rem;
+  max-width: 100%;
+}
+
+a.back-button {
+  display: inline-block;
+  margin-top: 1rem;
+  text-decoration: none;
+  background-color: #64748b;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+}
+
+a.back-button:hover {
+  background-color: #475569;
 }
