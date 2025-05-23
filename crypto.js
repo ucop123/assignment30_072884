@@ -1,25 +1,25 @@
 async function loadCrypto() {
+  const url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin,ethereum,solana";
+
   try {
-    const res = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin,ethereum,solana');
+    const res = await fetch(url);
     const data = await res.json();
 
     const labels = data.map(coin => coin.name);
     const prices = data.map(coin => coin.current_price);
 
-    new Chart(document.getElementById('cryptoChart'), {
-      type: 'line',
+    new Chart(document.getElementById("cryptoChart"), {
+      type: "bar",
       data: {
-        labels,
+        labels: labels,
         datasets: [{
-          label: 'Current Price (USD)',
+          label: "Price (USD)",
           data: prices,
-          borderColor: '#10b981',
-          borderWidth: 2,
-          fill: false
+          backgroundColor: ["#f59e0b", "#10b981", "#3b82f6"]
         }]
       }
     });
   } catch (err) {
-    alert("Error fetching crypto prices.");
+    alert("Failed to load crypto data.");
   }
 }
