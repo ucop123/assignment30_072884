@@ -61,7 +61,7 @@ canvas {
 }
 
 #countryList button {
-  background-color: #e2e8f0;
+  background-color: #dbeafe;
   border: none;
   padding: 0.4rem 0.8rem;
   border-radius: 6px;
@@ -71,7 +71,7 @@ canvas {
 }
 
 #countryList button:hover {
-  background-color: #cbd5e1;
+  background-color: #bfdbfe;
 }
 
 #countryList::-webkit-scrollbar {
