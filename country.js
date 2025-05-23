@@ -1,22 +1,42 @@
-async function fetchCountry() {
-  const name = document.getElementById("countryInput").value;
-  const url = `https://restcountries.com/v3.1/name/${name}`;
+let cryptoChartInstance = null; // Store the chart instance globally
+
+async function loadCrypto() {
+  const url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin,ethereum,solana";
 
   try {
     const res = await fetch(url);
     const data = await res.json();
-    const country = data[0];
 
-    document.getElementById("countryInfo").innerHTML = `
-      <h2>${country.name.common}</h2>
-      <img src="${country.flags.svg}" alt="Flag" width="100"/>
-      <p><strong>Capital:</strong> ${country.capital}</p>
-      <p><strong>Region:</strong> ${country.region}</p>
-      <p><strong>Population:</strong> ${country.population.toLocaleString()}</p>
-      <p><strong>Currency:</strong> ${Object.values(country.currencies)[0].name}</p>
-      <p><strong>Language:</strong> ${Object.values(country.languages).join(", ")}</p>
-    `;
+    const labels = data.map(coin => coin.name);
+    const prices = data.map(coin => coin.current_price);
+
+    // If a previous chart exists, destroy it to prevent duplicate rendering errors
+    if (cryptoChartInstance) {
+      cryptoChartInstance.destroy();
+    }
+
+    // Create new chart and store instance
+    cryptoChartInstance = new Chart(document.getElementById("cryptoChart"), {
+      type: "bar",
+      data: {
+        labels: labels,
+        datasets: [{
+          label: "Price (USD)",
+          data: prices,
+          backgroundColor: ["#f59e0b", "#10b981", "#3b82f6"]
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            display: true
+          }
+        }
+      }
+    });
   } catch (err) {
-    document.getElementById("countryInfo").innerText = "Country not found.";
+    alert("Failed to load crypto data.");
+    console.error("API error:", err);
   }
 }
