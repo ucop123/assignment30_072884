@@ -5,18 +5,21 @@ async function loadCrypto() {
 
   try {
     const res = await fetch(url);
+    if (!res.ok) throw new Error("API request failed");
+
     const data = await res.json();
 
     const labels = data.map(coin => coin.name);
     const prices = data.map(coin => coin.current_price);
 
-    // If a previous chart exists, destroy it to prevent duplicate rendering errors
+    // Destroy previous chart instance if it exists
     if (cryptoChartInstance) {
       cryptoChartInstance.destroy();
     }
 
-    // Create new chart and store instance
-    cryptoChartInstance = new Chart(document.getElementById("cryptoChart"), {
+    // Create new chart and save instance
+    const ctx = document.getElementById("cryptoChart").getContext("2d");
+    cryptoChartInstance = new Chart(ctx, {
       type: "bar",
       data: {
         labels: labels,
@@ -28,13 +31,20 @@ async function loadCrypto() {
       },
       options: {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
           legend: {
             display: true
           }
+        },
+        scales: {
+          y: {
+            beginAtZero: true
+          }
         }
       }
     });
+
   } catch (err) {
     alert("Failed to load crypto data.");
     console.error("API error:", err);
