@@ -1,4 +1,6 @@
-let cryptoChartInstance = null; // Store the chart instance globally
+let cryptoChartInstance = null;
+let refreshInterval = null;
+let isAutoRefreshing = false;
 
 async function loadCrypto() {
   const url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin,ethereum,solana";
@@ -10,12 +12,10 @@ async function loadCrypto() {
     const labels = data.map(coin => coin.name);
     const prices = data.map(coin => coin.current_price);
 
-    // If a previous chart exists, destroy it to prevent duplicate rendering errors
     if (cryptoChartInstance) {
       cryptoChartInstance.destroy();
     }
 
-    // Create new chart and store instance
     cryptoChartInstance = new Chart(document.getElementById("cryptoChart"), {
       type: "bar",
       data: {
@@ -38,5 +38,19 @@ async function loadCrypto() {
   } catch (err) {
     alert("Failed to load crypto data.");
     console.error("API error:", err);
+  }
+}
+
+function toggleAutoRefresh() {
+  const button = document.getElementById("refreshBtn");
+
+  if (!isAutoRefreshing) {
+    refreshInterval = setInterval(loadCrypto, 30000); // every 30 seconds
+    button.textContent = "Stop Auto Refresh";
+    isAutoRefreshing = true;
+  } else {
+    clearInterval(refreshInterval);
+    button.textContent = "Start Auto Refresh";
+    isAutoRefreshing = false;
   }
 }
