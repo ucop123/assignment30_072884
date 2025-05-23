@@ -47,18 +47,33 @@ canvas {
   max-width: 100%;
 }
 
-#countryList button {
-  background-color: #ADD8E6;
+#countryList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  max-height: 300px;
+  overflow-y: auto;
+  background-color: #f8fafc;
+  padding: 1rem;
   border: 1px solid #cbd5e0;
-  padding: 0.3rem 0.6rem;
-  margin: 0.2rem;
-  border-radius: 4px;
+  border-radius: 8px;
+}
+
+#countryList button {
+  background-color: #e2e8f0;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
   cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s ease;
 }
 
 #countryList button:hover {
-  background-color: #e2e8f0;
+  background-color: #cbd5e1;
 }
+
 
 .back-home {
   display: inline-block;
