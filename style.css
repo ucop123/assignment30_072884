@@ -1,9 +1,9 @@
 body {
   font-family: Arial, sans-serif;
+  background-color: #f0f4f8;
+  color: #1e293b;
   margin: 0;
   padding: 0;
-  background-color: #f8fafc;
-  color: #1e293b;
 }
 
 .container {
@@ -13,23 +13,19 @@ body {
 }
 
 h1 {
-  font-size: 2rem;
-  font-weight: bold;
   color: #2563eb;
 }
 
-nav a {
-  margin-right: 1rem;
-  color: #2563eb;
-  text-decoration: underline;
+input, button {
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  margin-right: 0.5rem;
 }
 
 button {
   background-color: #2563eb;
   color: white;
-  padding: 0.5rem 1rem;
   border: none;
-  margin-top: 1rem;
   cursor: pointer;
 }
 
