@@ -83,8 +83,6 @@ canvas {
   border-radius: 4px;
 }
 
-
-
 .back-home {
   display: inline-block;
   margin-top: 2rem;
@@ -100,4 +98,5 @@ canvas {
 .back-home:hover {
   background-color: #1e293b;
 }
+
 
