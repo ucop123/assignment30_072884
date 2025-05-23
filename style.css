@@ -47,18 +47,17 @@ canvas {
   max-width: 100%;
 }
 
-a.back-button {
-  display: inline-block;
-  margin-top: 1rem;
-  text-decoration: none;
-  background-color: #64748b;
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
+#countryList button {
+  background-color: #f1f5f9;
+  border: 1px solid #cbd5e0;
+  padding: 0.3rem 0.6rem;
+  margin: 0.2rem;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
-a.back-button:hover {
-  background-color: #475569;
+#countryList button:hover {
+  background-color: #e2e8f0;
 }
 
 .back-home {
