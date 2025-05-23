@@ -4,37 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Crypto Dashboard</title>
+  <link rel="stylesheet" href="css/styles.css" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-50 p-6">
-  <div class="container mx-auto">
-    <h1 class="text-3xl font-bold mb-4">💰 Crypto Dashboard</h1>
-    <button onclick="loadCrypto()" class="bg-green-600 text-white px-4 py-2">Load Prices</button>
-    <canvas id="cryptoChart" width="400" height="200" class="mt-6"></canvas>
+<body>
+  <div class="container">
+    <h1>💰 Crypto Dashboard</h1>
+    <button onclick="loadCrypto()">Load Prices</button>
+    <canvas id="cryptoChart" width="400" height="200"></canvas>
   </div>
-
-  <script>
-    async function loadCrypto() {
-      const res = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin,ethereum,solana');
-      const data = await res.json();
-
-      const labels = data.map(coin => coin.name);
-      const prices = data.map(coin => coin.current_price);
-
-      new Chart(document.getElementById('cryptoChart'), {
-        type: 'line',
-        data: {
-          labels,
-          datasets: [{
-            label: 'Current Price (USD)',
-            data: prices,
-            borderColor: '#10b981',
-            fill: false,
-          }]
-        }
-      });
-    }
-  </script>
+  <script src="crypto.js"></script>
 </body>
 </html>
