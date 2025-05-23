@@ -1,52 +1,65 @@
-let cryptoChartInstance = null; // Store the chart instance globally
+async function fetchCountry() {
+  const name = document.getElementById("countryInput").value.trim();
+  if (!name) return;
 
-async function loadCrypto() {
-  const url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin,ethereum,solana";
+  const url = `https://restcountries.com/v3.1/name/${encodeURIComponent(name)}`;
 
   try {
     const res = await fetch(url);
-    if (!res.ok) throw new Error("API request failed");
+    if (!res.ok) throw new Error("Country not found");
 
     const data = await res.json();
+    const country = data[0];
 
-    const labels = data.map(coin => coin.name);
-    const prices = data.map(coin => coin.current_price);
-
-    // Destroy previous chart instance if it exists
-    if (cryptoChartInstance) {
-      cryptoChartInstance.destroy();
-    }
-
-    // Create new chart and save instance
-    const ctx = document.getElementById("cryptoChart").getContext("2d");
-    cryptoChartInstance = new Chart(ctx, {
-      type: "bar",
-      data: {
-        labels: labels,
-        datasets: [{
-          label: "Price (USD)",
-          data: prices,
-          backgroundColor: ["#f59e0b", "#10b981", "#3b82f6"]
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            display: true
-          }
-        },
-        scales: {
-          y: {
-            beginAtZero: true
-          }
-        }
-      }
-    });
-
+    document.getElementById("countryInfo").innerHTML = `
+      <h2>${country.name.common}</h2>
+      <img src="${country.flags.svg}" alt="Flag" width="100"/>
+      <p><strong>Capital:</strong> ${country.capital?.[0] || 'N/A'}</p>
+      <p><strong>Region:</strong> ${country.region}</p>
+      <p><strong>Population:</strong> ${country.population.toLocaleString()}</p>
+      <p><strong>Currency:</strong> ${Object.values(country.currencies)[0]?.name || 'N/A'}</p>
+      <p><strong>Language:</strong> ${Object.values(country.languages || {}).join(", ")}</p>
+    `;
   } catch (err) {
-    alert("Failed to load crypto data.");
-    console.error("API error:", err);
+    document.getElementById("countryInfo").innerText = "Country not found.";
+    console.error("Error fetching country:", err);
   }
+}
+
+window.addEventListener("DOMContentLoaded", loadCountryList);
+
+async function loadCountryList() {
+  try {
+    const res = await fetch("https://restcountries.com/v3.1/all");
+    const data = await res.json();
+
+    const sorted = data.sort((a, b) => 
+      a.name.common.localeCompare(b.name.common)
+    );
+
+    const listHtml = sorted.map((c) => `
+      <button onclick="document.getElementById('countryInput').value='${escapeHtml(c.name.common)}'; fetchCountry();">
+        ${escapeHtml(c.name.common)}
+      </button>
+    `).join("");
+
+    document.getElementById("countryList").innerHTML = listHtml;
+  } catch (err) {
+    document.getElementById("countryList").innerText = "Failed to load country list.";
+    console.error("Error loading country list:", err);
+  }
+}
+
+// Utility to prevent HTML injection
+function escapeHtml(text) {
+  return text.replace(/[&<>"']/g, function (match) {
+    const map = {
+      '&': "&amp;",
+      '<': "&lt;",
+      '>': "&gt;",
+      '"': "&quot;",
+      "'": "&#039;"
+    };
+    return map[match];
+  });
 }
