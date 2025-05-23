@@ -61,14 +61,14 @@ canvas {
 }
 
 #countryList button {
-  background-color: #dbeafe;
+  background-color: #dbeafe; /* light blue */
+  color: #000000;            /* black text */
   border: none;
   padding: 0.4rem 0.8rem;
   border-radius: 6px;
   cursor: pointer;
   font-size: 0.9rem;
   transition: background-color 0.2s ease;
-}
 
 #countryList button:hover {
   background-color: #bfdbfe;
