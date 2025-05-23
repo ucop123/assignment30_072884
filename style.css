@@ -74,6 +74,16 @@ canvas {
   background-color: #cbd5e1;
 }
 
+#countryList::-webkit-scrollbar {
+  width: 6px;
+}
+
+#countryList::-webkit-scrollbar-thumb {
+  background-color: #94a3b8;
+  border-radius: 4px;
+}
+
+
 
 .back-home {
   display: inline-block;
