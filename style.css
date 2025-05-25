@@ -82,6 +82,14 @@ canvas {
   border-radius: 4px;
 }
 
+  .container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center; /* Center-align all content */
+}
+
+
 .back-home {
   display: inline-block;
   margin-top: 2rem;
