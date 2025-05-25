@@ -9,16 +9,25 @@
 <body>
   <div class="container">
     <a href="index.html" class="back-home">← Back</a>
-    <h1>🌍 Country Info Dashboard</h1>
-    <input type="text" id="countryInput" placeholder="Enter country name..">
-    <button onclick="fetchCountry()">Search</button>
-    <div id="countryInfo" style="margin-top: 1rem;"></div>
-<details style="margin-top: 1rem;">
-  <summary style="cursor: pointer;">Show Country List (A–Z)</summary>
-  <div id="countryList" style="margin-top: 0.5rem;"></div>
-</details>
 
+    <h1>🌍 Country Info Dashboard</h1>
+
+    <!-- Search input and button wrapper -->
+    <div class="controls">
+      <input type="text" id="countryInput" placeholder="Enter country name.." />
+      <button onclick="fetchCountry()">Search</button>
+    </div>
+
+    <!-- Country info output -->
+    <div id="countryInfo" style="margin-top: 1.5rem;"></div>
+
+    <!-- Expandable country list -->
+    <details style="margin-top: 1.5rem;">
+      <summary style="cursor: pointer;">Show Country List (A–Z)</summary>
+      <div id="countryList" style="margin-top: 1rem;"></div>
+    </details>
   </div>
+
   <script src="country.js"></script>
 </body>
 </html>
